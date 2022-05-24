@@ -85,12 +85,12 @@ class DQNTester:
                 print(f"B&H{self.agent.profitloss}")
                 break
 
-        Vsave_path2 = utils.SAVE_DIR + "/DQNPortfolio" + "/Metrics" + "/Portfolio Value Curve_test"
-        Vsave_path4 = utils.SAVE_DIR + "/DQNPortfolio" + "/Metrics" + "/Profitloss Curve_test"
-        Msave_path1 = utils.SAVE_DIR + "/DQNPortfolio" + "/Metrics" + "/Portfolio Value_test"
-        Msave_path2 = utils.SAVE_DIR + "/DQNPortfolio" + "/Metrics" + "/Profitloss_test"
-        Msave_path3 = utils.SAVE_DIR + "/DQNPortfolio" + "/Metrics" + "/Profitloss B&H"
-        Msave_path4 = utils.SAVE_DIR + "/DQNPortfolio" + "/Metrics" + "/Balances"
+        Vsave_path2 = utils.SAVE_DIR + "/Metrics" + "/Portfolio Value Curve_test"
+        Vsave_path4 = utils.SAVE_DIR + "/Metrics" + "/Profitloss Curve_test"
+        Msave_path1 = utils.SAVE_DIR + "/Metrics" + "/Portfolio Value_test"
+        Msave_path2 = utils.SAVE_DIR + "/Metrics" + "/Profitloss_test"
+        Msave_path3 = utils.SAVE_DIR + "/Metrics" + "/Profitloss B&H"
+        Msave_path4 = utils.SAVE_DIR + "/Metrics" + "/Balances"
 
         metrics.get_portfolio_values(save_path=Msave_path1)
         metrics.get_profitlosses(save_path=Msave_path2)
