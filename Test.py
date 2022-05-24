@@ -37,7 +37,7 @@ class DQNTester:
         model_path = utils.SAVE_DIR + "/Models" + "/DQNPortfolio.pth"
         self.agent.epsilon = 0
         self.agent.qnet.load_state_dict(torch.load(model_path))
-        self.agent.qnet_target.load_state_dict(agent.qnet.state_dict())
+        self.agent.qnet_target.load_state_dict(self.agent.qnet.state_dict())
 
     def run(self):
         metrics = Metrics()
