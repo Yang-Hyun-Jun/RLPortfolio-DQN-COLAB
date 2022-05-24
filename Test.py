@@ -50,8 +50,8 @@ class DQNTester:
 
         while True:
             index, actions, confidences = \
-                self.agent.get_action(torch.tensor(state1, device=device).float().view(1, K, -1),
-                                      torch.tensor(state2, device=device).float().view(1, K + 1))
+                self.agent.get_action(torch.tensor(state1, device=device).float().view(1, self.K, -1),
+                                      torch.tensor(state2, device=device).float().view(1, self.K + 1))
 
             _, next_state1, next_state2, reward, done = self.agent.step(actions, confidences)
 
