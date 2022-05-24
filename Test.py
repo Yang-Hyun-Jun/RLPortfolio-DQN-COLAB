@@ -20,7 +20,7 @@ class DQNTester:
         self.K = K
 
         self.score_net = Score().to(device)
-        self.qnet = Qnet(self.score_net).to(device)
+        self.qnet = Qnet(self.score_net, self.K).to(device)
         self.qnet_target = Qnet(self.score_net, self.K)
 
         self.balance = balance
