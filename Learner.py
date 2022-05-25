@@ -11,6 +11,7 @@ from Metrics import Metrics
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
 class DQNLearner:
     def __init__(self,
                  lr=1e-4, tau=0.005,
