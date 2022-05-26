@@ -7,8 +7,8 @@ from itertools import product
 class agent(nn.Module):
     # TRADING_CHARGE = 0.00015
     # TRADING_TEX = 0.0025
-    TRADING_CHARGE = 0.0
-    TRADING_TEX = 0.0
+    # TRADING_CHARGE = 0.0
+    # TRADING_TEX = 0.0
 
     ACTION_BUY = 0
     ACTION_SELL = 1
@@ -20,7 +20,7 @@ class agent(nn.Module):
 
     def __init__(self, environment,
                  qnet:nn.Module,
-                 qnet_target:nn.Module,
+                 qnet_target:nn.Module, cost,
                  lr:float, tau:float, K:int,
                  discount_factor:float,
                  min_trading_price:int,
@@ -41,6 +41,7 @@ class agent(nn.Module):
         self.qnet_target = qnet_target
         self.lr = lr
         self.tau = tau
+        self.cost = cost
         self.K = K
         self.epsilon = 0
         self.discount_factor = discount_factor
@@ -49,6 +50,9 @@ class agent(nn.Module):
         self.huber = nn.SmoothL1Loss()
         self.qnet.load_state_dict(self.qnet_target.state_dict())
         self.qnet_target.eval()
+
+        self.TRADING_CHARGE = 0.0025 if cost else 0
+        self.TRADING_TEX = 0.0
 
         self.num_stocks = np.array([0] * self.K)
         self.portfolio = np.array([0] * (self.K + 1), dtype=float)

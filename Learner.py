@@ -17,7 +17,7 @@ class DQNLearner:
                  lr=1e-4, tau=0.005,
                  discount_factor=0.9,
                  batch_size=30, memory_size=100,
-                 chart_data=None, K=None,
+                 chart_data=None, K=None, cost=False,
                  min_trading_price=None, max_trading_price=None):
 
         assert min_trading_price >= 0
@@ -39,6 +39,7 @@ class DQNLearner:
 
         self.lr = lr
         self.tau = tau
+        self.cost = cost
         self.K = K
         self.discount_factor = discount_factor
         self.min_trading_price = min_trading_price
@@ -47,7 +48,7 @@ class DQNLearner:
         self.agent = agent(environment=self.environment,
                            qnet=self.qnet, K=self.K,
                            qnet_target=self.qnet_target,
-                           lr=self.lr, tau=self.tau,
+                           lr=self.lr, tau=self.tau, cost=self.cost,
                            discount_factor=self.discount_factor,
                            min_trading_price=min_trading_price,
                            max_trading_price=max_trading_price)

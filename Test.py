@@ -12,12 +12,15 @@ from Q_network import Qnet
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class DQNTester:
-    def __init__(self, test_data, balance, min_trading_price, max_trading_price, K):
+    def __init__(self,
+                 test_data, balance, cost,
+                 min_trading_price, max_trading_price, K):
         self.test_data = test_data
 
         self.state1_dim = 5
         self.state2_dim = 2
         self.K = K
+        self.cost = cost
 
         self.score_net = Score().to(device)
         self.qnet = Qnet(self.score_net, self.K).to(device)
@@ -28,7 +31,7 @@ class DQNTester:
         self.max_trading_price = max_trading_price
 
         self.env = environment(chart_data=test_data)
-        self.agent = agent(environment=self.env,
+        self.agent = agent(environment=self.env, cost=self.cost,
                            qnet=self.qnet, qnet_target=self.qnet_target, K=self.K,
                            lr=0.0, tau=0.0, discount_factor=0.0,
                            min_trading_price=self.min_trading_price,
