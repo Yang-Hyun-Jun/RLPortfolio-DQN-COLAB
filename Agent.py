@@ -82,14 +82,14 @@ class agent(nn.Module):
         if prob < self.epsilon:
             index = np.random.choice(agent.NUM_ACTIONS)
             action = agent.ACTIONS[index].copy().reshape(-1, 1)
-            # confidence = np.array([0.2] * self.K).reshape(-1, 1)
-            confidence = np.array([0.02, 0.04, 0.03]).reshape(-1, 1)
+            confidence = np.array([0.2] * self.K).reshape(-1, 1)
+            # confidence = np.array([0.02, 0.04, 0.03]).reshape(-1, 1)
 
         else:
             index = np.array(self.q_value.argmax(dim=-1))
             action = agent.ACTIONS[index].copy().reshape(-1, 1)
-            # confidence = np.array([0.2] * self.K).reshape(-1, 1)
-            confidence = np.array([0.02, 0.04, 0.03]).reshape(-1, 1)
+            confidence = np.array([0.2] * self.K).reshape(-1, 1)
+            # confidence = np.array([0.02, 0.04, 0.03]).reshape(-1, 1)
         return index, action, confidence
 
     def decide_trading_unit(self, confidence, price):
