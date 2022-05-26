@@ -20,7 +20,7 @@ class agent(nn.Module):
 
     def __init__(self, environment,
                  qnet:nn.Module,
-                 qnet_target:nn.Module, cost,
+                 qnet_target:nn.Module, cost:float,
                  lr:float, tau:float, K:int,
                  discount_factor:float,
                  min_trading_price:int,
@@ -51,7 +51,7 @@ class agent(nn.Module):
         self.qnet.load_state_dict(self.qnet_target.state_dict())
         self.qnet_target.eval()
 
-        self.TRADING_CHARGE = 0.0025 if cost else 0
+        self.TRADING_CHARGE = cost
         self.TRADING_TEX = 0.0
 
         self.num_stocks = np.array([0] * self.K)

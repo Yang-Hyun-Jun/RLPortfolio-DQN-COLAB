@@ -17,7 +17,7 @@ class DQNLearner:
                  lr=1e-4, tau=0.005,
                  discount_factor=0.9,
                  batch_size=30, memory_size=100,
-                 chart_data=None, K=None, cost=False,
+                 chart_data=None, K=None, cost=0.0025,
                  min_trading_price=None, max_trading_price=None):
 
         assert min_trading_price >= 0
