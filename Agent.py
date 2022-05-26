@@ -134,7 +134,8 @@ class agent(nn.Module):
         return portfolio
 
     def get_reward(self, pv, pv_static):
-        reward = (pv-pv_static)/pv_static
+        # reward = (pv-pv_static)/pv_static
+        reward = np.log(pv) - np.log(12000)
         return reward
 
     def step(self, action, confidences):
@@ -208,7 +209,7 @@ class agent(nn.Module):
         self.profitloss = ((self.portfolio_value / self.initial_balance) - 1)*100
 
         reward = self.get_reward(self.portfolio_value, self.portfolio_value_static)
-        reward = reward*100
+        # reward = reward*100
 
         if len(self.environment.chart_data)-1 <= self.environment.idx:
             done = 1
