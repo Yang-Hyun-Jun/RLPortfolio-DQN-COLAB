@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 
+#넘파이 랜덤 시드 고정
+np.random.seed(0)
+
 Features_Raw = ["Open", "High", "Low", "Close", "Volume", "Price"]
 
 def get_data(path,

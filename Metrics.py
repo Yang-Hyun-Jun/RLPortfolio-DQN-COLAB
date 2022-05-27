@@ -2,6 +2,9 @@ import numpy as np
 import pandas as pd
 import utils
 
+#넘파이 랜덤 시드 고정
+np.random.seed(0)
+
 class Metrics:
     def __init__(self):
         self.portfolio_values = [] #portfolio_value는 첫 step 진행 이후부터 저장

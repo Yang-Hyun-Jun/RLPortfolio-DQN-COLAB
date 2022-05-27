@@ -9,6 +9,13 @@ from Agent import agent
 from Q_network import Score
 from Q_network import Qnet
 
+#넘파이 랜덤 시드 고정
+np.random.seed(0)
+#파이토치 랜덤 시드 고정
+torch.manual_seed(0)
+torch.cuda.manual_seed(0)
+torch.cuda.manual_seed_all(0)
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class DQNTester:

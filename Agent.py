@@ -4,6 +4,13 @@ import numpy as np
 
 from itertools import product
 
+#넘파이 랜덤 시드 고정
+np.random.seed(0)
+#파이토치 랜덤 시드 고정
+torch.manual_seed(0)
+torch.cuda.manual_seed(0)
+torch.cuda.manual_seed_all(0)
+
 class agent(nn.Module):
     # TRADING_CHARGE = 0.00015
     # TRADING_TEX = 0.0025
