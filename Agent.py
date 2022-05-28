@@ -162,7 +162,7 @@ class agent(nn.Module):
             if m_action[i] == agent.ACTION_SELL:
                 cost = self.TRADING_CHARGE + self.TRADING_TEX
                 # trading_unit = self.decide_trading_unit(confidences[i], p1_price)
-                trading_unit = 10
+                trading_unit = 5
                 trading_unit = min(trading_unit, self.num_stocks[i])
                 invest_amount = p1_price * trading_unit
 
@@ -180,7 +180,7 @@ class agent(nn.Module):
             if m_action[i] == agent.ACTION_BUY:
                 # trading_unit = self.decide_trading_unit(confidences[i], p1_price)
                 cost = self.TRADING_CHARGE
-                trading_unit = 10
+                trading_unit = 5
                 cal_balance = (self.balance - p1_price * trading_unit * (1+cost))
 
                 #돈 부족 한 경우
