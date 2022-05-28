@@ -23,7 +23,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 class DQNLearner:
     def __init__(self,
                  lr=1e-4, tau=0.005,
-                 discount_factor=0.9,
+                 discount_factor=0.9, trading_unit=10,
                  batch_size=30, memory_size=100,
                  chart_data=None, K=None, cost=0.0025,
                  min_trading_price=None, max_trading_price=None):
@@ -52,12 +52,14 @@ class DQNLearner:
         self.discount_factor = discount_factor
         self.min_trading_price = min_trading_price
         self.max_trading_price = max_trading_price
+        self.trading_unit = trading_unit
 
         self.agent = agent(environment=self.environment,
                            qnet=self.qnet, K=self.K,
                            qnet_target=self.qnet_target,
                            lr=self.lr, tau=self.tau, cost=self.cost,
                            discount_factor=self.discount_factor,
+                           trading_unit=self.trading_unit,
                            min_trading_price=min_trading_price,
                            max_trading_price=max_trading_price)
 

@@ -32,6 +32,7 @@ class agent(nn.Module):
                  qnet_target:nn.Module, cost:float,
                  lr:float, tau:float, K:int,
                  discount_factor:float,
+                 trading_unit:int,
                  min_trading_price:int,
                  max_trading_price:int):
 
@@ -45,6 +46,7 @@ class agent(nn.Module):
         self.environment = environment
         self.min_trading_price = min_trading_price
         self.max_trading_price = max_trading_price
+        self.trading_unit = trading_unit
 
         self.qnet = qnet
         self.qnet_target = qnet_target
@@ -162,7 +164,7 @@ class agent(nn.Module):
             if m_action[i] == agent.ACTION_SELL:
                 cost = self.TRADING_CHARGE + self.TRADING_TEX
                 # trading_unit = self.decide_trading_unit(confidences[i], p1_price)
-                trading_unit = 2
+                trading_unit = self.trading_unit
                 trading_unit = min(trading_unit, self.num_stocks[i])
                 invest_amount = p1_price * trading_unit
 
@@ -180,7 +182,7 @@ class agent(nn.Module):
             if m_action[i] == agent.ACTION_BUY:
                 # trading_unit = self.decide_trading_unit(confidences[i], p1_price)
                 cost = self.TRADING_CHARGE
-                trading_unit = 2
+                trading_unit = self.trading_unit
                 cal_balance = (self.balance - p1_price * trading_unit * (1+cost))
 
                 #돈 부족 한 경우
