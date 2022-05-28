@@ -4,8 +4,9 @@ import matplotlib.pyplot as plt
 import DataManager
 from mplfinance.original_flavor import candlestick_ohlc
 
+seed = 1
 #넘파이 랜덤 시드 고정
-np.random.seed(0)
+np.random.seed(seed)
 
 
 def get_chart_image(stock_code, date_start=None, date_end=None, save_path=None):

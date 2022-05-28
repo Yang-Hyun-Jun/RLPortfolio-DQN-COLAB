@@ -2,12 +2,13 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+seed = 1
 #넘파이 랜덤 시드 고정
-np.random.seed(0)
+np.random.seed(seed)
 #파이토치 랜덤 시드 고정
-torch.manual_seed(0)
-torch.cuda.manual_seed(0)
-torch.cuda.manual_seed_all(0)
+torch.manual_seed(seed)
+torch.cuda.manual_seed(seed)
+torch.cuda.manual_seed_all(seed)
 
 class Score(nn.Module):
     def __init__(self, state1_dim=5, output_dim=1):
