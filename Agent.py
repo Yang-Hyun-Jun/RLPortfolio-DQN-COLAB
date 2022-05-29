@@ -86,7 +86,9 @@ class agent(nn.Module):
     def get_action(self, state1, state2):
         with torch.no_grad():
             self.qnet.eval()
-            confidence, self.q_value = self.qnet(state1, state2).cpu()
+            confidence, self.q_value = self.qnet(state1, state2)
+            confidence = confidence.cpu()
+            self.q_value = self.q_value.cpu()
             self.qnet.train()
 
         prob = np.random.uniform(low=0.0, high=1.0, size=1)
