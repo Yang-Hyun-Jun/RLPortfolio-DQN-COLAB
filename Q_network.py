@@ -70,7 +70,7 @@ class Qnet(nn.Module):
         x = self.layer2(x)
         x = self.hidden_act(x)
         q = self.layer3(x)
-        return q, confidence
+        return q
 
 
 if __name__ == "__main__":
