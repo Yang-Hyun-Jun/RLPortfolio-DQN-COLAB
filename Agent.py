@@ -86,25 +86,28 @@ class agent(nn.Module):
     def get_action(self, state1, state2):
         with torch.no_grad():
             self.qnet.eval()
-            self.q_value = self.qnet(state1, state2).cpu()
+            confidence, self.q_value = self.qnet(state1, state2).cpu()
             self.qnet.train()
 
         prob = np.random.uniform(low=0.0, high=1.0, size=1)
         if prob < self.epsilon:
             index = np.random.choice(agent.NUM_ACTIONS)
             action = agent.ACTIONS[index].copy().reshape(-1, 1)
-            confidence = np.array([0.2] * self.K).reshape(-1, 1)
+            confidence = confidence.numpy().reshape(-1,1)
+            # confidence = np.array([0.2] * self.K).reshape(-1, 1)
             # confidence = np.array([0.02, 0.04, 0.03]).reshape(-1, 1)
 
         else:
             index = np.array(self.q_value.argmax(dim=-1))
             action = agent.ACTIONS[index].copy().reshape(-1, 1)
-            confidence = np.array([0.2] * self.K).reshape(-1, 1)
+            confidence = confidence.numpy().reshape(-1,1)
+            # confidence = np.array([0.2] * self.K).reshape(-1, 1)
             # confidence = np.array([0.02, 0.04, 0.03]).reshape(-1, 1)
         return index, action, confidence
 
     def decide_trading_unit(self, confidence, price):
-        trading_price = self.min_trading_price + confidence * (self.max_trading_price - self.min_trading_price)
+        # trading_price = self.min_trading_price + confidence * (self.max_trading_price - self.min_trading_price)
+        trading_price = self.portfolio_value * confidence
         trading_unit = int(np.array(trading_price)/price)
         return trading_unit
 
@@ -163,8 +166,8 @@ class agent(nn.Module):
             # Sell
             if m_action[i] == agent.ACTION_SELL:
                 cost = self.TRADING_CHARGE + self.TRADING_TEX
-                # trading_unit = self.decide_trading_unit(confidences[i], p1_price)
-                trading_unit = self.trading_unit
+                trading_unit = self.decide_trading_unit(confidences[i], p1_price)
+                # trading_unit = self.trading_unit
                 trading_unit = min(trading_unit, self.num_stocks[i])
                 invest_amount = p1_price * trading_unit
 
@@ -180,9 +183,9 @@ class agent(nn.Module):
             p1_price = close_p1[i]
             # Buy
             if m_action[i] == agent.ACTION_BUY:
-                # trading_unit = self.decide_trading_unit(confidences[i], p1_price)
+                trading_unit = self.decide_trading_unit(confidences[i], p1_price)
                 cost = self.TRADING_CHARGE
-                trading_unit = self.trading_unit
+                # trading_unit = self.trading_unit
                 cal_balance = (self.balance - p1_price * trading_unit * (1+cost))
 
                 #돈 부족 한 경우

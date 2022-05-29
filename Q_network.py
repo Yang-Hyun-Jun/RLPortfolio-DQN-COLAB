@@ -64,13 +64,14 @@ class Qnet(nn.Module):
             x_list.append(globals()[f"x{k+1}"])
 
         # header
+        confidence = torch.tanh(x_list)
         x = torch.cat(x_list + [portfolio], dim=-1)
         x = self.layer1(x)
         x = self.hidden_act(x)
         x = self.layer2(x)
         x = self.hidden_act(x)
         q = self.layer3(x)
-        return q
+        return q, confidence
 
 
 if __name__ == "__main__":
