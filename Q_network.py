@@ -64,7 +64,6 @@ class Qnet(nn.Module):
             x_list.append(globals()[f"x{k+1}"])
 
         # header
-        confidence = torch.tanh(torch.tensor(x_list))
         x = torch.cat(x_list + [portfolio], dim=-1)
         x = self.layer1(x)
         x = self.hidden_act(x)
