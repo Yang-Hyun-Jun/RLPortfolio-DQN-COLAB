@@ -1,6 +1,9 @@
 import random
 
-random.seed(1)
+seed = 1
+random.seed(seed)
+
+
 class ReplayMemory:
     def __init__(self, max_size):
         self.buffer = [None] * max_size

@@ -1,9 +1,6 @@
 import pandas as pd
 import numpy as np
 
-seed = 1
-#넘파이 랜덤 시드 고정
-np.random.seed(seed)
 
 Features_Raw = ["Open", "High", "Low", "Close", "Volume", "Price"]
 
